@@ -1,0 +1,110 @@
+body {
+    margin-top: 40px; /* This margin just makes the text easier to read. You can remove it if you want since it can mess with your other styles. */
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  /* Styles for forms */
+  form {
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  label {
+    display: inline-block;
+    width: 100px; /* adjust the width as needed */
+  }
+  
+  input,
+  select {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  form button {
+    display: block;
+    margin-bottom: 1px;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  form button:hover {
+    background-color: #c82333;
+  }
+  
+  /* Styles for body's ::before pseudo element */
+  body::before {
+    content: "XS";
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #343a40;
+    border-bottom-left-radius: 5px;
+    cursor: default;
+  }
+  
+  /* Styles for divs */
+  div {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Styles for boxes */
+  .box {
+    background-color: #add8e6;
+    border: 1px solid #000080;
+    min-height: 50px;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Media queries */
+  @media (min-width: 576px) {
+    body::before {
+      content: "SM";
+    }
+  }
+  
+  @media (min-width: 768px) {
+    body::before {
+      content: "MD";
+    }
+  }
+  
+  @media (min-width: 992px) {
+    body::before {
+      content: "LG";
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    body::before {
+      content: "XL";
+    }
+  }
+  
+  @media (min-width: 1400px) {
+    body::before {
+      content: "XXL";
+    }
+  }
