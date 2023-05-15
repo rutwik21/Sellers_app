@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>sellers app</title>
+        <link rel="stylesheet" href="css.css">
+      </head>
+      <body>
+        <h1>Sellers App</h1>
+    
+        <form>
+          <label for="name">Item name:</label>
+          <input type="text" id="name" required><br>
+    
+          <label for="description">Description:</label>
+          <input type="text" id="description" required><br>
+
+          <label for="price">Price:</label>
+          <input type="number" id="price" required><br>
+
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" required><br>
+    
+          <button type="submit" id="button">Add Item</button>
+        </form>
+    
+        <h2>Item List</h2>
+        <h4 id="msg"></h4>
+    
+        <ul id="item-list"></ul>
+
+        <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"> </script>
+        <script>
+          const name = document.querySelector("#name");
+          const dis = document.querySelector("#description");
+          const price = document.querySelector("#price");
+          const qty = document.querySelector("#quantity");
+          const btn = document.querySelector("#button");
+          const item_list = document.querySelector("#item-list");
+          const msg = document.querySelector("#msg");
+
+          btn.addEventListener('click',()=>{
+            const obj = {'name':name.value,'discription':dis.value,'price':price.value,'quantity':qty.value};
+
+            axios.post("https://crudcrud.com/api/44b865e6fa684646a62b13282488d6f3/Inventory",obj)
+            .then(()=>display())
+            .catch((err)=>console.log(err))
+
+          })
+
+          function display(){
+            item_list.innerHTML="";
+
+
+            axios.get("https://crudcrud.com/api/44b865e6fa684646a62b13282488d6f3/Inventory")
+            .then(
+                (res)=>{
+                res.data.forEach((item)=>{
+                    
+
+                    const product=document.createElement('li');
+                    const buy1=document.createElement('button');
+                    const buy2=document.createElement('button');
+                    const buy3=document.createElement('button');
+
+                    buy1.textContent='Buy1';
+                    buy2.textContent='Buy2';
+                    buy3.textContent='Buy3';
+                    product.textContent=`${item.name} - ${item.discription} - ${item.price} - ${item.quantity}`
+
+                    buy1.addEventListener('click',()=>{
+                        if(item.quantity>0){
+                            axios.put(`https://crudcrud.com/api/44b865e6fa684646a62b13282488d6f3/Inventory/${item._id}`,{name:item.name,discription:item.discription,price:item.price,quantity:item.quantity-1})
+                            .then((res)=>{msg.textContent='success';display();})
+                            .catch((err)=>console.log(err));
+                        }
+                        else{
+                            msg.textContent='Not Avilable!';
+                        }
+                    })
+
+                    buy2.addEventListener('click',()=>{
+                        if(item.quantity>1){
+                            axios.put("https://crudcrud.com/api/44b865e6fa684646a62b13282488d6f3/Inventory"+`/${item._id}`,{name:item.name,discription:item.discription,price:item.price,quantity:item.quantity-2})
+                            .then((res)=>{msg.textContent='success';display();})
+                            .catch((err)=>console.log(err))
+                        }
+                        else{
+                            msg.textContent='Not Avilable!';
+                        }
+                    })
+
+                    buy3.addEventListener('click',()=>{
+                        if(item.quantity>2){
+                            axios.put("https://crudcrud.com/api/44b865e6fa684646a62b13282488d6f3/Inventory"+`/${item._id}`,{name:item.name,discription:item.discription,price:item.price,quantity:item.quantity-3})
+                            .then((res)=>{msg.textContent='success';display();})
+                            .catch((err)=>console.log(err))
+                        }
+                        else{
+                            msg.textContent='Not Avilable!';
+                        }
+                    })
+                    item_list.appendChild(product);
+                    item_list.appendChild(buy1);
+                    item_list.appendChild(buy2);
+                    item_list.appendChild(buy3);
+
+                })})
+          }
+
+          display();
+
+
+
+        </script>
+    </body>
+</html>
